@@ -1,0 +1,11 @@
+{
+  "name": "FakeOff",
+  "version": "1.0",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["http://www.google.com/*", "https://www.google.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
