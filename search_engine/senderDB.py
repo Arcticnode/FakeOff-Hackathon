@@ -4,7 +4,7 @@ import requests
 import covid19fact_data_source
 import wk_black_list_data_source
 
-mydb = pymysql.connect(host="localhost", user='root', passwd="", database="test_data")
+mydb = pymysql.connect(host="localhost", user='root', passwd="g", database="test_data")
 cursor = mydb.cursor()
 
 

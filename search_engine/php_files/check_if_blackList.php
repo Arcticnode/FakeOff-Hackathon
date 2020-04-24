@@ -1,14 +1,14 @@
 <?php
-include 'conexion.php';
+include 'connexion.php';
 $received_url = $_GET['url'];
 //$received_url = $_POST['url'];
 //Search in blackList.
 $query = "SELECT * FROM BlackList where LINK = '$url'";
 //Search in valid_list.
 $query2 = "SELECT * FROM WhiteList where SOURCE = '$url'";
-$result = $conexion -> query($query2);
+$result = $connexion -> query($query2);
 
-$result2 = $conexion -> query($query);
+$result2 = $connexion -> query($query);
 if ($result -> fetch_assoc()){
 	$return = Array();
     $return["success"] = 100;
@@ -28,7 +28,7 @@ else{
 	}
 }
 
-$conexion -> close();
+$connexion -> close();
 
 
   ?>
