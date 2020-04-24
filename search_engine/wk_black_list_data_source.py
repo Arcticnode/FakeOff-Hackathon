@@ -11,10 +11,10 @@ notIncludeWords = ['Cybersquatted.', 'Domain', 'expired', 'Down', 'empty', '404'
 
 def getPage(url):
     page = requests.get(url)
-    nameArray = getNameSite(page)
-    print(len(nameArray))
+    # nameArray = getNameSite(page)
+    # print(len(nameArray))
     linksArray = getLinks(page)
-    print(len(linksArray))
+    # print(len(linksArray))
 
     return linksArray
 

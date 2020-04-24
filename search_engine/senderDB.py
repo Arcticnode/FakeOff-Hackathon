@@ -2,19 +2,26 @@ import pymysql
 import URLS
 import requests
 import covid19fact_data_source
+import wk_black_list_data_source
 
 mydb = pymysql.connect(host="localhost", user='root', passwd="", database="test_data")
 cursor = mydb.cursor()
 
 
 def update_covid19facts():
-    dropTable('TEST')
+    dropTable('WhiteList')
     createTable()
     insertCovid19Information()
 
 
+def update_BList():
+    dropTable('BlackList')
+    createBList()
+    insertBList()
+
+
 def createTable():
-    table = """CREATE TABLE TEST( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT NOT NULL, 
+    table = """CREATE TABLE WhiteList( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT NOT NULL, 
     INFORMATION MEDIUMTEXT NOT NULL, PRIMARY KEY(ID)) """
     print('Table created')
     cursor.execute(table)
@@ -41,8 +48,6 @@ def insertCovid19Information():
     information = URLS.getInformation_covid19()
     print("%s articles found" % len(information))
     print("Information collected... Please Wait...")
-
-    table_name = 'TEST'
     val = []
 
     for i in information:
@@ -51,7 +56,7 @@ def insertCovid19Information():
 
     print(val)
 
-    add_order = "INSERT INTO TEST (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s)"
+    add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s)"
 
     cursor.executemany(add_order, val)
     mydb.commit()
@@ -70,3 +75,30 @@ def select_all(table):
         print(row)
 
     mydb.commit()
+
+
+def createBList():
+    table = """CREATE TABLE BlackList( ID INT NOT NULL AUTO_INCREMENT, LINK TEXT NOT NULL UNIQUE , CONFIRMED BOOLEAN, 
+     PRIMARY KEY(ID)) """
+    print('Table BlackList created')
+    cursor.execute(table)
+
+
+def insertBList():
+    print("Insert Process... Please Wait...")
+    linksArray = wk_black_list_data_source.getPage(URLS.wk_black_list)
+    print('%s links were found and reading to be added to the Black List.' % len(linksArray))
+    val = []
+
+    for i in linksArray:
+        index = linksArray.index(i)
+        if not linksArray[index].lower() in val:
+            val.append(linksArray[index].lower())
+
+    print(val)
+
+    add_order = "INSERT INTO BlackList (LINK, CONFIRMED) VALUES (%s, 1)"
+
+    cursor.executemany(add_order, val)
+    mydb.commit()
+    print(cursor.rowcount, "was inserted.")
