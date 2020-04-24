@@ -1,11 +1,14 @@
 var titles = document.getElementsByTagName("h3");
 for (var i = 0; i < titles.length; i++) {
-	var percentage = Math.floor(Math.random() * 100);
-	var rating = "<br> Trustworhiness: " + percentage.toString(10) + "%";
-	if (percentage > 50) {
-		rating = rating.fontcolor("green");
-	} else {
-		rating = rating.fontcolor("red");
+	var div = titles[i].parentNode.parentNode;
+	if (div.className == "r") {
+		var percentage = Math.floor(Math.random() * 100);
+		var rating = "<br> Trustworhiness: " + percentage.toString(10) + "%";
+		if (percentage > 50) {
+			rating = rating.fontcolor("green");
+		} else {
+			rating = rating.fontcolor("red");
+		}
+		titles[i].innerHTML += rating;
 	}
-	titles[i].innerHTML += rating;
 }
