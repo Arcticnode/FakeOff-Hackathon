@@ -1,0 +1,14 @@
+h3 {
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: medium;
+}
+
+#cblacklist {
+  background-color: white;
+  color: black;
+  border: 2px solid #1abc9c; 
+}
