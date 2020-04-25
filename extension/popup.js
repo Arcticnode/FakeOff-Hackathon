@@ -49,9 +49,23 @@ function addTitle() {
                       var response = request.responseText;
                       var negative = parseFloat(response.substring(14,20).trim());
                       var positive = parseFloat(response.substring(34,40).trim());
+                      
+                      var paraTitle = document.createElement("p");
+                      paraTitle.style.fontFamily = "Impact";
+                      paraTitle.textContent = title;
+                      document.body.appendChild(paraTitle);
+
                       if (Math.abs(negative - positive) > 600000) {
-                          alert(title + "suspected clickbait");
-                          alert(negative + "," + positive);
+                        var paraText = document.createElement("p");
+                        paraText.style.fontFamily = "Impact";
+                        paraText.textContent = "suspected clickbait";
+                        paraText.style.color = "red";
+                        document.body.appendChild(paraText);
+
+                          // alert(title + "suspected clickbait");
+                          // alert(negative + "," + positive);
+                          // paragraph.text = title + " suspected clickbait";
+                          // // document.appendChild(paragraph);
                         }
                       /*else {
                           alert(title + "title is neutral");
