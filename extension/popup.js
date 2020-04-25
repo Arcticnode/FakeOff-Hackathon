@@ -49,7 +49,7 @@ function addTitle() {
                       var response = request.responseText;
                       var negative = parseFloat(response.substring(14,20).trim());
                       var positive = parseFloat(response.substring(34,40).trim());
-                      if (Math.abs(negative - positive) > 420000) {
+                      if (Math.abs(negative - positive) > 600000) {
                           alert(title + "suspected clickbait");
                           alert(negative + "," + positive);
                         }
