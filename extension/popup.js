@@ -51,15 +51,20 @@ function addTitle() {
                       var positive = parseFloat(response.substring(34,40).trim());
                       
                       var paraTitle = document.createElement("p");
-                      paraTitle.style.fontFamily = "Impact";
+                      paraTitle.style.fontFamily = "Times New Roman";
                       paraTitle.textContent = title;
+                      paraTitle.style.fontWeight = "bold";
                       document.body.appendChild(paraTitle);
 
                       if (Math.abs(negative - positive) > 600000) {
                         var paraText = document.createElement("p");
                         paraText.style.fontFamily = "Impact";
                         paraText.textContent = "suspected clickbait";
-                        paraText.style.color = "red";
+                        paraText.style.color = "white";
+                        paraText.style.border = "medium solid #000000";
+                        paraText.style.textAlign = "center";
+                        paraText.style.background = "brown";
+
                         document.body.appendChild(paraText);
 
                           // alert(title + "suspected clickbait");
@@ -67,11 +72,19 @@ function addTitle() {
                           // paragraph.text = title + " suspected clickbait";
                           // // document.appendChild(paragraph);
                         }
-                      /*else {
-                          alert(title + "title is neutral");
-                          alert(negative + "," + positive);
+                      else {
+                        var paraText = document.createElement("p");
+                        paraText.style.fontFamily = "Impact";
+                        paraText.textContent = "title is neutral";
+                        paraText.style.color = "white";
+                        paraText.style.border = "medium solid #000000";
+                        paraText.style.textAlign = "center";
+                        paraText.style.background = "green";
 
-                        } */
+                        document.body.appendChild(paraText);
+                          // alert(title + "title is neutral");
+                          // alert(negative + "," + positive);
+                        } 
                     }
                 }
                 request.send();
