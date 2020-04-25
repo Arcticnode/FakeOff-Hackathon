@@ -1,14 +1,17 @@
 h3 {
-  padding: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
+  padding: 40px;
+  font-family: Times;
   background: #1abc9c;
   color: white;
-  font-size: medium;
+  font-size: 15px;
 }
 
-#cblacklist {
+#blacklist {
   background-color: white;
   color: black;
   border: 2px solid #1abc9c; 
+}
+
+hr.solid {
+  border-top: 2px solid #bbb;
 }
