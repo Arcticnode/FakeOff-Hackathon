@@ -33,7 +33,7 @@ def update_BList():
     for v in val:
         counter = counter + insertNewLinkBList(v)
     print('\n\n\n' + str(counter) + ' new links are added')
-    
+
 
 def createTable():
     table = """CREATE TABLE WhiteList( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT NULL, 
@@ -120,7 +120,10 @@ def insertBList():
 
 
 def insertNewLinkBList(url):
+    url = '' + url
     counter = 0
+    if not url.startswith("https://"):
+        url = "https://" + url
     try:
         insertLink = "INSERT INTO BlackList (LINK, CONFIRMED) VALUES (%s,1);"
         cursor.execute(insertLink, url)

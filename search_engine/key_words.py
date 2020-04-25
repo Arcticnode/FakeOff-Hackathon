@@ -27,23 +27,8 @@ if url is not '':
     for t in textArray:
         text = text + t
 
-    print('\n' + text)
+    print('\n' + text + '\n\n')
 
     words = Rake(max_length=1)
     words.extract_keywords_from_text(text)
     print(words.get_ranked_phrases_with_scores())
-
-    degree_word_frequency = Rake(ranking_metric=Metric.DEGREE_TO_FREQUENCY_RATIO, max_length=1)
-    degree_word_frequency.extract_keywords_from_text(text)
-    degree_word_frequency_array = degree_word_frequency.get_ranked_phrases_with_scores()
-    print(degree_word_frequency_array)
-
-    word_degree = Rake(ranking_metric=Metric.WORD_DEGREE, max_length=1)
-    word_degree.extract_keywords_from_text(text)
-    word_degree_array = word_degree.get_ranked_phrases_with_scores()
-    print(word_degree_array)
-
-    word_frequency = Rake(ranking_metric=Metric.WORD_FREQUENCY, max_length=1)
-    word_frequency.extract_keywords_from_text(text)
-    word_frequency_array = word_frequency.get_ranked_phrases_with_scores()
-    print(word_frequency_array)

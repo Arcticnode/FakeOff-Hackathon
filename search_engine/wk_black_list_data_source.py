@@ -27,7 +27,7 @@ def getLinks(page):
     for table in all_table:
         all_td = table.find_all('td')
         for td in all_td:
-            url = td.textArray.strip()
+            url = td.text.strip()
 
             if not url.startswith('['):
 

@@ -6,7 +6,7 @@ import senderDB
 # URLS.get_updated_information_who()
 
 # This are the commands to update all the covid19facts information and get it all displayed
-senderDB.update_covid19facts()
+#senderDB.update_covid19facts()
 # senderDB.select_all('WhiteList')
 
 # Wikipedia black list
