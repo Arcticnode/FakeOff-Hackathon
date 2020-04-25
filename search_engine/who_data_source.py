@@ -60,8 +60,10 @@ def getNewsInformation(page):
     '''
     for div in all_div:
         print(div.get_text(separator=" "))
+        '''
         for myItem in myList.split('X'):
             myString = myString.join(myItem.replace('X', 'X\n'))
+        '''
         # print(paragraphText)
         # print('\n\n\n\n\n\n')
         all_paragraphsArray.append(div.get_text())

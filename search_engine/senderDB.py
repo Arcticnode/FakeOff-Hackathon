@@ -4,7 +4,7 @@ import requests
 import covid19fact_data_source
 import wk_black_list_data_source
 
-mydb = pymysql.connect(host="localhost", user='root', passwd="g", database="test_data")
+mydb = pymysql.connect(host="localhost", user='root', passwd="", database="test_data")
 cursor = mydb.cursor()
 
 
@@ -15,9 +15,23 @@ def update_covid19facts():
 
 
 def update_BList():
-    dropTable('BlackList')
-    createBList()
-    insertBList()
+    # dropTable('BlackList')
+    # createBList()
+    # insertBList()
+    print("Update in Process... Please Wait...")
+    linksArray = wk_black_list_data_source.getPage(URLS.wk_black_list)
+    print('%s links were found and reading to be added to the Black List.' % len(linksArray))
+    val = []
+
+    for i in linksArray:
+        index = linksArray.index(i)
+        if not linksArray[index].lower() in val:
+            val.append(linksArray[index].lower())
+
+    counter = 0
+    for v in val:
+        counter = counter + insertNewLinkBList(v)
+    print('\n\n\n' + str(counter) + ' new links are added')
 
 
 def createTable():
@@ -56,7 +70,7 @@ def insertCovid19Information():
 
     print(val)
 
-    add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s)"
+    add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s);"
 
     cursor.executemany(add_order, val)
     mydb.commit()
@@ -97,8 +111,22 @@ def insertBList():
 
     print(val)
 
-    add_order = "INSERT INTO BlackList (LINK, CONFIRMED) VALUES (%s, 1)"
+    add_order = "INSERT INTO BlackList (LINK, CONFIRMED) VALUES (%s, 1);"
 
     cursor.executemany(add_order, val)
     mydb.commit()
-    print(cursor.rowcount, "was inserted.")
+    print(cursor.rowcount, " was inserted.")
+
+
+def insertNewLinkBList(url):
+    counter = 0
+    try:
+        insertLink = "INSERT INTO BlackList (LINK, CONFIRMED) VALUES (%s,1);"
+        cursor.execute(insertLink, url)
+        mydb.commit()
+        print(cursor.rowcount, " link inserted to BlackList")
+        counter = counter + 1
+    except:
+        print(url + ' is already in the BlackList')
+
+    return counter

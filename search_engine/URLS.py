@@ -48,5 +48,5 @@ def get_updated_information_who():
 
 def getBlackListWk():
     urls = wk_black_list_data_source.getPage(wk_black_list)
-    for url in urls:
-        print(url)
+    # for url in urls:
+    #   print(url)
