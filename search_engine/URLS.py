@@ -40,8 +40,10 @@ def print_updated_information_covid19facts():
 
 def get_updated_information_who():
     urls = who_data_source.update_information_links(who_covid_news)
-    for url in urls:
-        print(url)
+    print(urls)
+    print(len(urls))
+    print('\n\n\n\n\n\n')
+    print(urls[0])
 
 
 def getBlackListWk():

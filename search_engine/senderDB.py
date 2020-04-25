@@ -21,7 +21,7 @@ def update_BList():
 
 
 def createTable():
-    table = """CREATE TABLE WhiteList( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT NOT NULL, 
+    table = """CREATE TABLE WhiteList( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT DEFAULT 'Title', 
     INFORMATION MEDIUMTEXT NOT NULL, PRIMARY KEY(ID)) """
     print('Table created')
     cursor.execute(table)

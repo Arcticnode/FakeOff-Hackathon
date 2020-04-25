@@ -6,8 +6,11 @@ from bs4 import BeautifulSoup
 def update_information_links(url):
     page = requests.get(url)
     titlesArray = getTitles(page)
-    linksArray = getLinks(page)
+    print(len(titlesArray))
+    #linksArray = getLinks(page)
+    #print(len(linksArray))
     informationArray = getNewsInformation(page)
+    print(len(informationArray))
 
     return informationArray
 
@@ -38,18 +41,51 @@ def getTitles(page):
     for title in all_titles:
         realTitle = title.find_all('h2')
         for rt in realTitle:
-            titlesArray.append(rt.text.strip())
+            if not rt.text.strip() == '':
+                titlesArray.append(rt.text.strip())
 
     return titlesArray
 
 
 def getNewsInformation(page):
-    textInformation = []
     text_soup = BeautifulSoup(page.content, 'html.parser')
 
     results = text_soup.find(id='PageContent_C229_Col01')
-    all_information = results.find_all('p')
-    for information in all_information:
-        textInformation.append(information.text.strip())
+    all_div = results.find_all('div', class_='sf-content-block content-block')
 
-    return textInformation
+    all_news = []
+    one_paragraph_text = ''
+    one_paragraph = []
+    all_paragraphsArray = []
+
+    for div in all_div:
+        all_paragraphs = div.find_all('p')
+        paragraphText = ''
+        for paragraph in all_paragraphs:
+            txt = paragraph.text.strip()
+            if not txt == '':
+                paragraphText = paragraphText + txt + '\n'
+
+        # print(paragraphText)
+        # print('\n\n\n\n\n\n')
+        all_paragraphsArray.append(paragraphText)
+        paragraphText = ''
+
+    #for paragraph in all_paragraphsArray:
+
+
+    return all_paragraphsArray
+'''
+        for paragraph in all_paragraphs:
+            txt = paragraph.text.strip()
+            if not txt == '':
+                if '[' in txt:
+                    txt = txt.replace('[', '')
+                if ']' in txt:
+                    txt = txt.replace(']', '')
+
+                print(txt)
+                one_paragraph.append(txt)
+    all_paragraphsArray.append(one_paragraph)
+'''
+
