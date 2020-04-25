@@ -18,7 +18,14 @@ function addURL() {
                 var host = pathArray[2];
                 url = protocol + '//' + host;
                 blacklist.push(url);
-                alert(url +  " added to blacklist.");
+
+                var blacklistBtn = document.getElementById("blacklist");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " added to blacklist.";
+                para.style.fontWeight = "bold";
+                blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
+                // alert(url +  " added to blacklist.");
             }
     });
 }
