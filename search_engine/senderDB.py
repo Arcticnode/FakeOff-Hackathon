@@ -68,8 +68,8 @@ def close_connection():
 
 
 def select_all(table):
-    retrive = "SELECT * FROM %s"
-    cursor.execute(retrive % table)
+    retrieve = "SELECT * FROM %s"
+    cursor.execute(retrieve % table)
     rows = cursor.fetchall()
     for row in rows:
         print(row)

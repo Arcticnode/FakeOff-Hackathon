@@ -5,13 +5,8 @@ from bs4 import BeautifulSoup
 
 def update_information_links(url):
     page = requests.get(url)
-    titlesArray = getTitles(page)
-    print(len(titlesArray))
-    #linksArray = getLinks(page)
-    #print(len(linksArray))
     informationArray = getNewsInformation(page)
     print(len(informationArray))
-
     return informationArray
 
 
@@ -53,11 +48,8 @@ def getNewsInformation(page):
     results = text_soup.find(id='PageContent_C229_Col01')
     all_div = results.find_all('div', class_='sf-content-block content-block')
 
-    all_news = []
-    one_paragraph_text = ''
-    one_paragraph = []
     all_paragraphsArray = []
-
+    '''
     for div in all_div:
         all_paragraphs = div.find_all('p')
         paragraphText = ''
@@ -65,27 +57,15 @@ def getNewsInformation(page):
             txt = paragraph.text.strip()
             if not txt == '':
                 paragraphText = paragraphText + txt + '\n'
-
+    '''
+    for div in all_div:
+        print(div.get_text(separator=" "))
+        for myItem in myList.split('X'):
+            myString = myString.join(myItem.replace('X', 'X\n'))
         # print(paragraphText)
         # print('\n\n\n\n\n\n')
-        all_paragraphsArray.append(paragraphText)
-        paragraphText = ''
-
-    #for paragraph in all_paragraphsArray:
-
+        all_paragraphsArray.append(div.get_text())
+        # paragraphText = ''
 
     return all_paragraphsArray
-'''
-        for paragraph in all_paragraphs:
-            txt = paragraph.text.strip()
-            if not txt == '':
-                if '[' in txt:
-                    txt = txt.replace('[', '')
-                if ']' in txt:
-                    txt = txt.replace(']', '')
-
-                print(txt)
-                one_paragraph.append(txt)
-    all_paragraphsArray.append(one_paragraph)
-'''
 
