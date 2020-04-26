@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
 var blacklist = [];
 
 function addURL() {
-    
+
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
- 
+
     if (tabs[0] != undefined){
             function JavaSplit(string, separator, n) {
                 var split = string.split(separator);
@@ -35,8 +35,8 @@ function addURL() {
                   url = protocol +'//' + host;
 
                 }
-              
-          
+
+
                 console.log(url);
                 blacklist.push(url);
                 var req = new XMLHttpRequest();
@@ -61,7 +61,7 @@ function addURL() {
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
                 }
-                
+
                 };
                 req.send(null);
                 // alert(url +  " added to blacklist.");
@@ -80,9 +80,9 @@ var headline = document.getElementById('headline');
 });
 
 function addTitle() {
-    
+
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
- 
+
     if (tabs[0] != undefined){
                 title = tabs[0].title;
                 var encodedTitle = encodeURIComponent(title);
@@ -95,7 +95,7 @@ function addTitle() {
                       var response = request.responseText;
                       var negative = parseFloat(response.substring(14,20).trim());
                       var positive = parseFloat(response.substring(34,40).trim());
-                      
+
                       var paraTitle = document.createElement("p");
                       paraTitle.style.fontFamily = "Times New Roman";
                       paraTitle.textContent = title;
@@ -130,7 +130,7 @@ function addTitle() {
                         document.body.appendChild(paraText);
                           // alert(title + "title is neutral");
                           // alert(negative + "," + positive);
-                        } 
+                        }
                     }
                 }
                 request.send();
@@ -138,8 +138,12 @@ function addTitle() {
     });
 }
 
+// Block Article button
+document.addEventListener('DOMContentLoaded', function() {
+  var blockArticle = document.getElementById('blockArticle');
+  blockArticle.addEventListener('click', function() {
 
+      //  Blacklist the article
 
-
-
-
+    });
+});
