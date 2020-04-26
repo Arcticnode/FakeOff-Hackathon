@@ -144,6 +144,47 @@ document.addEventListener('DOMContentLoaded', function() {
   blockArticle.addEventListener('click', function() {
 
       //  Blacklist the article
+      var url = "";
+      addArticle();
 
     });
 });
+
+function addArticle() {
+
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
+
+    if (tabs[0] != undefined){
+                url = tabs[0].url;
+
+                console.log(url);
+                blacklist.push(url);
+                var req = new XMLHttpRequest();
+                req.overrideMimeType(url);
+                req.open('GET', "https://34.89.30.97/phpFakeOutServer/add_blacklist.php"+"?url="+url, true);
+                req.onload  = function() {
+                var jsonResponse = JSON.parse(req.responseText);
+                number = jsonResponse.success;
+                if(number){
+                  var blacklistBtn = document.getElementById("blockArticle");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " added to blacklist.";
+                para.style.fontWeight = "bold";
+                blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
+                }
+                else{
+                var blacklistBtn = document.getElementById("blockArticle");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " not added to blacklist (already there).";
+                para.style.fontWeight = "bold";
+                blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
+                }
+
+                };
+                req.send(null);
+                //alert(url +  " added to blacklist.");
+            }
+    });
+}
