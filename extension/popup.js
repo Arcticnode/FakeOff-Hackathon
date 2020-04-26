@@ -13,7 +13,15 @@ function addURL() {
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
  
     if (tabs[0] != undefined){
-                var pathArray = tabs[0].url.split( '/' );
+            function JavaSplit(string, separator, n) {
+                var split = string.split(separator);
+                if (split.length <= n)
+                    return split;
+                var out = split.slice(0,n-1);
+                out.push(split.slice(n-1).join(separator));
+                return out;
+                }
+                var pathArray = JavaSplit(tabs[0].url, '/' ,4);
                 var protocol = pathArray[0];
                 var host = pathArray[2];
                 if(pathArray[3].endsWith("/")){
@@ -24,13 +32,31 @@ function addURL() {
           
                 console.log(url);
                 blacklist.push(url);
-
-                var blacklistBtn = document.getElementById("blacklist");
+                var req = new XMLHttpRequest();
+                req.overrideMimeType(url);
+                req.open('GET', "https://34.89.30.97/phpFakeOutServer/add_blacklist.php"+"?url="+url, true);
+                req.onload  = function() {
+                var jsonResponse = JSON.parse(req.responseText);
+                number = jsonResponse.success;
+                if(number){
+                  var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
                 para.style.color = "green";
                 para.textContent = url + " added to blacklist.";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
+                }
+                else{
+                var blacklistBtn = document.getElementById("blacklist");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " not added to blacklist (already there).";
+                para.style.fontWeight = "bold";
+                blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
+                }
+                
+                };
+                req.send(null);
                 // alert(url +  " added to blacklist.");
             }
     });
