@@ -169,3 +169,26 @@ function addURL() {
             }
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+var bodyText = document.getElementById('text');
+  bodyText.addEventListener('click', function() {
+      var text = "";
+      //getText();
+    });
+});
+
+        /*function getText(){
+            text = document.getElementsByTagName('body')[0].innerText || document.body.textContent;
+            alert(text);
+            var api_url = "https://api.uclassify.com/v1/uClassify/Sentiment/classify";
+            var request = new XMLHttpRequest();
+            request.open('POST', api_url, true);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.setRequestHeader("Authorization", "Token eVa4e4wCJlap");
+            request.onreadystatechange = function() {
+            var response = request.responseText;
+            alert(response);
+            }
+            request.send(JSON.stringify({ texts: ["the movie is really good"] }));
+          }*/
