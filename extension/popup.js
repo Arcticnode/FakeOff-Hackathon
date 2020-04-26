@@ -13,28 +13,12 @@ function addURL() {
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
 
     if (tabs[0] != undefined){
-            function JavaSplit(string, separator, n) {
-                var split = string.split(separator);
-                if (split.length <= n)
-                    return split;
-                var out = split.slice(0,n-1);
-                out.push(split.slice(n-1).join(separator));
-                return out;
-                }
-                var pathArray = JavaSplit(tabs[0].url, '/' ,4);
+                var pathArray = tabs[0].url.split('/');
                 var protocol = pathArray[0];
                 var host = pathArray[2];
-                if(pathArray[3].endsWith("/")){
-                  pathArray[3] = pathArray[3].substring(0,pathArray[3].length-1);
-                }
-                console.log(pathArray);
-                   if(pathArray[3]!=""){
-                  url = protocol + '//' + host + '/'+pathArray[3];
-                }
-                else{
-                  url = protocol +'//' + host;
+                url = protocol +'//' + host;
 
-                }
+  
 
 
                 console.log(url);
