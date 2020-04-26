@@ -5,6 +5,7 @@ if (title == "TEXT KEY WORD FINDER") {
         inputbox.value = response;
         document.forms[0].submit();
         inputbox.value = "";
+        
     });
     // inputbox.value = "Inkscape needs your help.";
     // document.forms[0].submit();
