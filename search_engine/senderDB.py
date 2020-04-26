@@ -1,17 +1,18 @@
 import pymysql
-import URLS
+from . import URLS
 import requests
-import covid19fact_data_source
-import wk_black_list_data_source
+from . import covid19fact_data_source
+from . import wk_black_list_data_source
 
 mydb = pymysql.connect(host="localhost", user='root', passwd="", database="test_data")
 cursor = mydb.cursor()
 
 
-def update_covid19facts():
+def updateWhiteList():
     dropTable('WhiteList')
     createTable()
     insertCovid19Information()
+    insertWHOInformation()
 
 
 def update_BList():
@@ -134,3 +135,23 @@ def insertNewLinkBList(url):
         print(url + ' is already in the BlackList')
 
     return counter
+
+
+def insertWHOInformation():
+    print("Insert Process... Please Wait...")
+    information = URLS.get_updated_information_who()
+    print("%s articles found" % len(information))
+    print("Information collected... Please Wait...")
+    val = []
+    web = 'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen'
+    for i in information:
+        index = information.index(i)
+        val.append((web, None, information[index]))
+
+    print(val)
+
+    add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s);"
+
+    cursor.executemany(add_order, val)
+    mydb.commit()
+    print(cursor.rowcount, "was inserted.")

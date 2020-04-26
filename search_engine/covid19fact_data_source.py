@@ -39,7 +39,7 @@ def getTitles(page):
     all_titles = titles_soup.find_all('h3')
 
     for title in all_titles:
-        titlesArray.append(title.textArray.strip())
+        titlesArray.append(title.text.strip())
 
     titlesArray.pop(len(titlesArray) - 1)
     return titlesArray

@@ -1,12 +1,15 @@
 import requests
 import URLS
+import re
 from bs4 import BeautifulSoup
 
 
 def update_information_links(url):
     page = requests.get(url)
+    # titleArray = getTitles(page)
+    # print(len(titleArray))
     informationArray = getNewsInformation(page)
-    print(len(informationArray))
+    # print(len(informationArray))
     return informationArray
 
 
@@ -32,13 +35,15 @@ def getTitles(page):
     titles_soup = BeautifulSoup(page.content, 'html.parser')
 
     results = titles_soup.find(id='PageContent_C229_Col01')
-    all_titles = results.find_all('div', class_='sf-content-block content-block')
-    for title in all_titles:
-        realTitle = title.find_all('h2')
-        for rt in realTitle:
-            if not rt.textArray.strip() == '':
-                titlesArray.append(rt.textArray.strip())
+    all_paragrahs = results.find_all('div', class_='sf-content-block content-block')
+    for title in all_paragrahs:
+        realTitle = title.get_text(separator=" ")
+        txt = realTitle
+        if '\xa0' in txt:
+            txt = txt.replace('\xa0', '')
+        titlesArray.append(txt)
 
+    print(titlesArray)
     return titlesArray
 
 
@@ -59,14 +64,14 @@ def getNewsInformation(page):
                 paragraphText = paragraphText + txt + '\n'
     '''
     for div in all_div:
-        print(div.get_text(separator=" "))
-        '''
-        for myItem in myList.split('X'):
-            myString = myString.join(myItem.replace('X', 'X\n'))
-        '''
-        # print(paragraphText)
-        # print('\n\n\n\n\n\n')
-        all_paragraphsArray.append(div.get_text())
+        paragraph = div.get_text(" ")
+        # print(div.get_text(separator="\n"))
+        if '\xa0' in paragraph:
+            txt = paragraph.replace('\xa0', '')
+        txt = txt.strip()
+        # print(txt)
+        # print('\n\n')
+        all_paragraphsArray.append(txt)
         # paragraphText = ''
 
     return all_paragraphsArray
