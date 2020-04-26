@@ -137,6 +137,9 @@ function addURL() {
 
     if (tabs[0] != undefined){
                 url = tabs[0].url;
+                if (url.endsWith("/")){
+                  url = url.substring(0,url.length-1);
+                }
 
                 console.log(url);
                 blacklist.push(url);
