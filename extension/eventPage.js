@@ -1,9 +1,13 @@
+chrome.runtime.onInstalled.addListener(function(details) {
 var contextMenuItem = {
 	"id": "FakeOff",
 	"title": "Check for similar articles",
 	"contexts": ["selection"]
 };
 
+var curStr;
+// var arr = [];
+// var nex = 0;
 chrome.contextMenus.create(contextMenuItem);
 chrome.contextMenus.onClicked.addListener(function(clickData) {
 	if (clickData.menuItemId == "FakeOff" && clickData.selectionText) {
@@ -24,9 +28,15 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
         	// var newURL = "https://www.stackoverflow.com";
   			chrome.tabs.create({ url: newURL });
 
-  			chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  				sendResponse(str);
-  			});
+  			curStr = str;
+  			// if (!arr.includes(curStr)) {
+  			// 	arr[nex++] = curStr;
+  				chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  					// alert(curStr);
+	  				sendResponse(curStr);
+	  			});
+  			// }
+  			// });
   			// chrome.runtime.sendMessage("Hi");
   	// 		chrome.tabs.query({currentWindow: true, active: true}, 
 			// function(tabs) {
@@ -37,3 +47,5 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
 		}
 	}
 })
+
+});

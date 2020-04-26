@@ -1,14 +1,10 @@
 var title = document.getElementsByTagName("title")[0].innerHTML;
 if (title == "TEXT KEY WORD FINDER") {
     var inputbox = document.getElementsByTagName("input")[1];
-    chrome.runtime.sendMessage("Hi", function(response) {
+    chrome.runtime.sendMessage(Math.random() * 10000000 + "", function(response) {
         inputbox.value = response;
         document.forms[0].submit();
-        inputbox.value = "";
-        
     });
-    // inputbox.value = "Inkscape needs your help.";
-    // document.forms[0].submit();
 }
 // function highlightHandler(e) {
 //     // get the highlighted text
