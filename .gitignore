@@ -1,2 +1,3 @@
-dj/.idea/*
-search_engine/.idea/*
+/search_engine/.idea/workspace.xml
+/extension/dj/.idea/
+.idea
