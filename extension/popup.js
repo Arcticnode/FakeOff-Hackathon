@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
   var blacklist = document.getElementById('blacklist');
   blacklist.addEventListener('click', function() {
-      var url = "";
-      addURL();
+      var domain = "";
+      addDomain();
     });
 });
 
 var blacklist = [];
 
-function addURL() {
+function addDomain() {
 
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
 
@@ -16,16 +16,13 @@ function addURL() {
                 var pathArray = tabs[0].url.split('/');
                 var protocol = pathArray[0];
                 var host = pathArray[2];
-                url = protocol +'//' + host;
+                domain = protocol +'//' + host;
 
-  
-
-
-                console.log(url);
-                blacklist.push(url);
+                console.log(domain);
+                blacklist.push(domain);
                 var req = new XMLHttpRequest();
-                req.overrideMimeType(url);
-                req.open('GET', "https://34.89.30.97/phpFakeOutServer/add_blacklist.php"+"?url="+url, true);
+                req.overrideMimeType(domain);
+                req.open('GET', "https://34.89.30.97/phpFakeOutServer/add_blacklist.php"+"?url="+domain, true);
                 req.onload  = function() {
                 var jsonResponse = JSON.parse(req.responseText);
                 number = jsonResponse.success;
@@ -33,7 +30,7 @@ function addURL() {
                   var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
                 para.style.color = "green";
-                para.textContent = url + " added to blacklist.";
+                para.textContent = domain + " added to blacklist.";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
                 }
@@ -41,7 +38,7 @@ function addURL() {
                 var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
                 para.style.color = "green";
-                para.textContent = url + " not added to blacklist (already there).";
+                para.textContent = domain + " not added to blacklist (already there).";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
                 }
@@ -129,12 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       //  Blacklist the article
       var url = "";
-      addArticle();
+      addURL();
 
     });
 });
 
-function addArticle() {
+function addURL() {
 
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
 
