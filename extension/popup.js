@@ -1,47 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
   var blacklist = document.getElementById('blacklist');
   blacklist.addEventListener('click', function() {
-      var url = "";
-      addURL();
+      var domain = "";
+      addDomain();
     });
 });
 
 var blacklist = [];
 
-function addURL() {
+function addDomain() {
 
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
 
     if (tabs[0] != undefined){
-            function JavaSplit(string, separator, n) {
-                var split = string.split(separator);
-                if (split.length <= n)
-                    return split;
-                var out = split.slice(0,n-1);
-                out.push(split.slice(n-1).join(separator));
-                return out;
-                }
-                var pathArray = JavaSplit(tabs[0].url, '/' ,4);
+                var pathArray = tabs[0].url.split('/');
                 var protocol = pathArray[0];
                 var host = pathArray[2];
-                if(pathArray[3].endsWith("/")){
-                  pathArray[3] = pathArray[3].substring(0,pathArray[3].length-1);
-                }
-                console.log(pathArray);
-                   if(pathArray[3]!=""){
-                  url = protocol + '//' + host + '/'+pathArray[3];
-                }
-                else{
-                  url = protocol +'//' + host;
+                domain = protocol +'//' + host;
 
-                }
-
-
-                console.log(url);
-                blacklist.push(url);
+                console.log(domain);
+                blacklist.push(domain);
                 var req = new XMLHttpRequest();
-                req.overrideMimeType(url);
-                req.open('GET', "https://34.89.30.97/phpFakeOutServer/add_blacklist.php"+"?url="+url, true);
+                req.overrideMimeType(domain);
+                req.open('GET', "https://34.89.30.97/phpFakeOutServer/add_blacklist.php"+"?url="+domain, true);
                 req.onload  = function() {
                 var jsonResponse = JSON.parse(req.responseText);
                 number = jsonResponse.success;
@@ -49,7 +30,7 @@ function addURL() {
                   var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
                 para.style.color = "green";
-                para.textContent = url + " added to blacklist.";
+                para.textContent = domain + " added to blacklist.";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
                 }
@@ -57,7 +38,7 @@ function addURL() {
                 var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
                 para.style.color = "green";
-                para.textContent = url + " not added to blacklist (already there).";
+                para.textContent = domain + " not added to blacklist (already there).";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
                 }
@@ -145,12 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       //  Blacklist the article
       var url = "";
-      addArticle();
+      addURL();
 
     });
 });
 
-function addArticle() {
+function addURL() {
 
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
 
@@ -188,3 +169,26 @@ function addArticle() {
             }
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+var bodyText = document.getElementById('text');
+  bodyText.addEventListener('click', function() {
+      var text = "";
+      //getText();
+    });
+});
+
+        /*function getText(){
+            text = document.getElementsByTagName('body')[0].innerText || document.body.textContent;
+            alert(text);
+            var api_url = "https://api.uclassify.com/v1/uClassify/Sentiment/classify";
+            var request = new XMLHttpRequest();
+            request.open('POST', api_url, true);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.setRequestHeader("Authorization", "Token eVa4e4wCJlap");
+            request.onreadystatechange = function() {
+            var response = request.responseText;
+            alert(response);
+            }
+            request.send(JSON.stringify({ texts: ["the movie is really good"] }));
+          }*/
