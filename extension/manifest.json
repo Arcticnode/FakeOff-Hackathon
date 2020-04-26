@@ -32,7 +32,7 @@
    "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["eventPage.js"],
+    "scripts": ["jquery.js", "eventPage.js"],
     "persistent": false
   }
 }

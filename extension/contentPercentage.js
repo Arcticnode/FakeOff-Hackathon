@@ -24,7 +24,6 @@ for (var i = 0; i < titles.length; i++) {
                 rating = rating.fontcolor("orange");
             }
             titles[i].innerHTML += rating;
-          
         };
 
         req.send(null);}
