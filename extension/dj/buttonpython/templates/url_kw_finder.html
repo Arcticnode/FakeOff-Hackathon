@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL KEY WORD FINDER</title>
+</head>
+<body>
+    <button onclick="location.href='{% url 'homeScript' %}'">Home</button> <hr>
+    <form action="/url-search-result/" method="post">
+        URL searcher <br>
+        {% csrf_token %}
+        Input Text:
+        <input type="text" name="param" required> <br><br>
+        {{ data_external }} <br><br>
+        {{ data }}
+        <br>
+        <input type="submit" value="Execute url">
+    </form>
+</body>
+</html>

@@ -19,8 +19,12 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.button, name='home'),
-    url(r'^output', views.output, name='script'),
-    url(r'^external', views.external),
 
+    url(r'^urlSearch', views.buttonUrl, name='urlScript'),
+    url(r'^url-search-result', views.urlSearch),
+
+    url(r'^textSearch', views.buttonText, name='textScript'),
+    url(r'^text-search-result', views.textSearch),
+
+    url(r'^$', views.button, name='homeScript'),
 ]
