@@ -16,13 +16,7 @@ function addURL() {
                 var pathArray = tabs[0].url.split( '/' );
                 var protocol = pathArray[0];
                 var host = pathArray[2];
-                if(pathArray[3].endsWith("/")){
-                  pathArray[3] = pathArray[3].substring(0,pathArray[3].length-1);
-                }
-                console.log(pathArray);
-                url = protocol + '//' + host + '/'+pathArray[3];
-          
-                console.log(url);
+                url = protocol + '//' + host;
                 blacklist.push(url);
 
                 var blacklistBtn = document.getElementById("blacklist");
