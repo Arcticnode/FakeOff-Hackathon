@@ -25,6 +25,9 @@ function addURL() {
                 var pathArray = JavaSplit(tabs[0].url, '/' ,4);
                 var protocol = pathArray[0];
                 var host = pathArray[2];
+                if(pathArray[3].endsWith("/")){
+                  pathArray[3] = pathArray[3].substring(0,pathArray[3].length-1);
+                }
                 console.log(pathArray);
                 url = protocol + '//' + host + '/'+pathArray[3];
           
