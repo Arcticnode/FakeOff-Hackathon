@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.button, name='home'),
     url(r'^output', views.output, name='script'),
-    url(r'^searchwords', views.search_key_words_url, name='search'),
+    url(r'^external', views.external),
 
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import render
 import requests
 from rake_nltk import Rake
 from bs4 import BeautifulSoup
+from subprocess import run, PIPE
+import sys
 
 
 def button(request):
@@ -36,8 +38,22 @@ def output(request):
     return render(request, 'home.html', {'data': data})
 
 
-def search_key_words_url(url):
+def external(request):
+    inp = request.POST.get('param')
+    words = Rake(max_length=1)
+    words.extract_keywords_from_text(inp)
+    list_words = words.get_ranked_phrases()
+    list_words = list_words[:5]
 
+    print(list_words)
+    data = ''
+    for w in list_words:
+        data = data + w + '%'
+
+    return render(request, 'home.html', {'data1': data})
+
+
+def search_key_words_url(url):
     url = ''
     textArray = []
     text = ''

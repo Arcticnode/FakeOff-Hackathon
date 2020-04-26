@@ -130,8 +130,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.key_words_from_url" />
+      <item itemvalue="Python.main" />
       <item itemvalue="Python.my_py" />
     </list>
   </component>
