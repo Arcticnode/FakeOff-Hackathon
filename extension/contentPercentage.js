@@ -11,17 +11,21 @@ for (var i = 0; i < titles.length; i++) {
         req.open('GET', "https://34.89.30.97/phpFakeOutServer/check_if_blackList.php"+"?url="+url, false);
         req.onload  = function() {
             var jsonResponse = JSON.parse(req.responseText);
-            var percentage = jsonResponse.success;
-            var rating = "<br> Trustworhiness: " + percentage.toString(10) + "%";
-            if (percentage > 50) {
-            rating = rating.fontcolor("green");
+            var percentage = jsonResponse.success.toString(10);
+            var rating;
+            if (percentage == "0") {
+                rating = "<br>Not Trustworthy";
+                rating = rating.fontcolor("red");
+            } else if (percentage == "100") {
+                rating = "<br>Verified Trustworthy";
+                rating = rating.fontcolor("green");
             } else {
-            rating = rating.fontcolor("red");
-
+                rating = "<br>Trustworthiness unidentified";
+                rating = rating.fontcolor("orange");
             }
-            titles[i].innerHTML += rating +url;
+            titles[i].innerHTML += rating;
           
-            };
+        };
 
         req.send(null);}
     }
