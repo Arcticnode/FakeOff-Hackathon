@@ -36,8 +36,8 @@ def getTitles(page):
     for title in all_titles:
         realTitle = title.find_all('h2')
         for rt in realTitle:
-            if not rt.text.strip() == '':
-                titlesArray.append(rt.text.strip())
+            if not rt.textArray.strip() == '':
+                titlesArray.append(rt.textArray.strip())
 
     return titlesArray
 

@@ -45,7 +45,7 @@ def getNameSite(page):
 
     all_td = all_tables[len(all_tables) - 1].find_all('td')
     for td in all_td:
-        name = td.text.strip()
+        name = td.textArray.strip()
 
         if not name.startswith('['):
 

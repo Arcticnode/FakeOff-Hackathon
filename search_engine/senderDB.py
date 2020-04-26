@@ -15,9 +15,10 @@ def update_covid19facts():
 
 
 def update_BList():
-    # dropTable('BlackList')
-    # createBList()
-    # insertBList()
+    #dropTable('BlackList')
+    #createBList()
+    #insertBList()
+
     print("Update in Process... Please Wait...")
     linksArray = wk_black_list_data_source.getPage(URLS.wk_black_list)
     print('%s links were found and reading to be added to the Black List.' % len(linksArray))
@@ -35,7 +36,7 @@ def update_BList():
 
 
 def createTable():
-    table = """CREATE TABLE WhiteList( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT DEFAULT 'Title', 
+    table = """CREATE TABLE WhiteList( ID INT NOT NULL AUTO_INCREMENT, SOURCE TEXT NOT NULL, TITLE TEXT NULL, 
     INFORMATION MEDIUMTEXT NOT NULL, PRIMARY KEY(ID)) """
     print('Table created')
     cursor.execute(table)
@@ -119,7 +120,10 @@ def insertBList():
 
 
 def insertNewLinkBList(url):
+    url = '' + url
     counter = 0
+    if not url.startswith("https://"):
+        url = "https://" + url
     try:
         insertLink = "INSERT INTO BlackList (LINK, CONFIRMED) VALUES (%s,1);"
         cursor.execute(insertLink, url)
