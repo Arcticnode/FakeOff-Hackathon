@@ -28,7 +28,14 @@ function addURL() {
                   pathArray[3] = pathArray[3].substring(0,pathArray[3].length-1);
                 }
                 console.log(pathArray);
-                url = protocol + '//' + host + '/'+pathArray[3];
+                   if(pathArray[3]!=""){
+                  url = protocol + '//' + host + '/'+pathArray[3];
+                }
+                else{
+                  url = protocol +'//' + host;
+
+                }
+              
           
                 console.log(url);
                 blacklist.push(url);

@@ -19,7 +19,7 @@ for (var i = 0; i < titles.length; i++) {
             rating = rating.fontcolor("red");
 
             }
-            titles[i].innerHTML += rating;
+            titles[i].innerHTML += rating +url;
           
             };
 
