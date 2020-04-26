@@ -13,8 +13,11 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      // "matches": ["http://www.google.com/*", "https://www.google.com/*"],
-      "js": ["jquery.js", "content.js"]
+      "js": ["jquery.js", "contentHighlight.js"]
+    },
+    {
+      "matches": ["http://www.google.com/*", "https://www.google.com/*"],
+      "js": ["contentPercentage.js"]
     }
   ],
   "icons": {

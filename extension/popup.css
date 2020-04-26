@@ -6,10 +6,11 @@ h3 {
   font-size: 15px;
 }
 
-#blacklist {
+.buttons {
   background-color: white;
   color: black;
   border: 2px solid #1abc9c; 
+  display: inline;
 }
 
 hr.solid {
