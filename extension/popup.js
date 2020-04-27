@@ -174,8 +174,8 @@ function addURL() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-var bodyText = document.getElementById('text');
-  bodyText.addEventListener('click', function() {
+var whitelist = document.getElementById('whiteList');
+  whitelist.addEventListener('click', function() {
       var text = "";
       getText();
     });
