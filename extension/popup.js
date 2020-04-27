@@ -13,6 +13,7 @@ function addDomain() {
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
 
     if (tabs[0] != undefined){
+
                 var pathArray = tabs[0].url.split('/');
                 var protocol = pathArray[0];
                 var host = pathArray[2];
@@ -29,7 +30,7 @@ function addDomain() {
                 if(number){
                   var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
-                para.style.color = "green";
+                para.style.color = "blue";
                 para.textContent = domain + " added to blacklist.";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
@@ -37,7 +38,7 @@ function addDomain() {
                 else{
                 var blacklistBtn = document.getElementById("blacklist");
                 var para = document.createElement("p");
-                para.style.color = "green";
+                para.style.color = "blue";
                 para.textContent = domain + " not added to blacklist (already there).";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
@@ -152,7 +153,7 @@ function addURL() {
                 if(number){
                   var blacklistBtn = document.getElementById("blockArticle");
                 var para = document.createElement("p");
-                para.style.color = "green";
+                para.style.color = "blue";
                 para.textContent = url + " added to blacklist.";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
@@ -160,7 +161,7 @@ function addURL() {
                 else{
                 var blacklistBtn = document.getElementById("blockArticle");
                 var para = document.createElement("p");
-                para.style.color = "green";
+                para.style.color = "blue";
                 para.textContent = url + " not added to blacklist (already there).";
                 para.style.fontWeight = "bold";
                 blacklistBtn.parentNode.replaceChild(para, blacklistBtn);
@@ -227,7 +228,7 @@ function getText(){
                 if(number){
                 var whiteListBtn = document.getElementById("whiteList");
                 var para = document.createElement("p");
-                para.style.color = "green";
+                para.style.color = "blue";
                 para.textContent = url + " added to whitelist.";
                 para.style.fontWeight = "bold";
                 whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
@@ -235,7 +236,7 @@ function getText(){
                 else{
                 var whiteListBtn = document.getElementById("whiteList");
                 var para = document.createElement("p");
-                para.style.color = "green";
+                para.style.color = "blue";
                 para.textContent = url + " not added to whitelist (already there).";
                 para.style.fontWeight = "bold";
                 whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
