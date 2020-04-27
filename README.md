@@ -4,7 +4,7 @@ The extension's menu allows users to be in charge of what they choose to view on
 Our database is mostly based on content that falls in line with the WHO. 
 The extension makes use of two servers that we set up:
 The first server runs our information database.
-The second server extracts keywords using text analysis and return.
+The second server extracts keywords using text analysis.
 
 Functionality:
 MENU
