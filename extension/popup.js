@@ -174,16 +174,80 @@ function addURL() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-var bodyText = document.getElementById('text');
-  bodyText.addEventListener('click', function() {
+var whitelist = document.getElementById('whiteList');
+  whitelist.addEventListener('click', function() {
       var text = "";
-      //getText();
+      var url = "";
+      var title = "";
+      getText();
     });
 });
 
-        /*function getText(){
-            text = document.getElementsByTagName('body')[0].innerText || document.body.textContent;
-            alert(text);
+
+function getText(){
+          chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
+          if (tabs[0] != undefined){
+                url = tabs[0].url;
+                title = tabs[0].title;
+                if (url.endsWith("/")){
+                  url = url.substring(0,url.length-1);
+          }
+          console.log(url);
+          var key = "26cdf4cddb999055b70feb1562fcda9b";
+          var api_url = "https://document-parser-api.lateral.io/?url=" + url.toString();
+          var request = new XMLHttpRequest();
+          request.open('GET', api_url, false);
+          request.setRequestHeader("content-Type", "application/json");
+          request.setRequestHeader("subscription-key", "26cdf4cddb999055b70feb1562fcda9b");
+          request.onreadystatechange = function() {
+          var response = JSON.parse(request.responseText);
+          text = response.body.toString();
+          text = text.replace(/'/g,"");
+          text = text.replace(/"/g,"");
+          text = text.replace(/^a-zA-Z0-9]/g, "");
+          text = text.replace(/@/g, "");
+          title = title.replace(/'/g,"");
+          console.log(url);
+          console.log(title);
+
+          console.log(text)
+          //alert(text);
+          }
+          request.send();
+          }
+
+          var req = new XMLHttpRequest();
+                req.overrideMimeType(url);
+                req.open('GET', "http://34.89.30.97/phpFakeOutServer/add_whitelist.php" +"?url=" + url + "&text=" + text + "&title=" + title, false);
+                req.onload  = function() {
+
+                var jsonResponse = JSON.parse(req.responseText);
+                console.log(jsonResponse);
+                number = jsonResponse.success;
+                if(number){
+                var whiteListBtn = document.getElementById("whiteList");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " added to whitelist.";
+                para.style.fontWeight = "bold";
+                whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
+                }
+                else{
+                var whiteListBtn = document.getElementById("whiteList");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " not added to whitelist (already there).";
+                para.style.fontWeight = "bold";
+                whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
+                }
+
+                };
+                req.send(null);
+                //alert(url +  " added to blacklist.");
+                });
+            }
+
+            /*textToSearch = JSON.stringify({ texts: [text] });
             var api_url = "https://api.uclassify.com/v1/uClassify/Sentiment/classify";
             var request = new XMLHttpRequest();
             request.open('POST', api_url, true);
@@ -193,5 +257,7 @@ var bodyText = document.getElementById('text');
             var response = request.responseText;
             alert(response);
             }
-            request.send(JSON.stringify({ texts: ["the movie is really good"] }));
+            request.send(text);
           }*/
+
+

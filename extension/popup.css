@@ -9,7 +9,7 @@ hr.solid {
   border-top: 2px solid #bbb;
 }
 
-#blacklist , #headline, #blockArticle, #text  {
+#blacklist , #headline, #blockArticle, #text, #whiteList  {
 display: inline-block;
 width: 30%;
 text-align:center;
