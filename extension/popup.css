@@ -1,10 +1,18 @@
+body{
+  background: 	#696969;
+}
 
 .buttons {
   transition-duration: 0.4s;
 }
+
 .buttons:hover {
   background-color: #ADD8E6;
-  color: white;
+  color: #0d2561;
+}
+
+.domain{
+  margin-left: 8px;
 }
 
 hr.solid {
@@ -12,8 +20,11 @@ hr.solid {
 }
 
 #blacklist , #headline, #blockArticle, #whiteList  {
-display: inline-block;
-width: 30%;
-text-align:center;
-line-height:17px;
+  display: inline;
+  margin-right: auto;
+  margin-top: auto;
+  width: 23%;
+  height: 40px;
+  text-align:center;
+  line-height:17px;
 }
