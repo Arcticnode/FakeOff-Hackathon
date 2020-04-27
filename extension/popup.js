@@ -177,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
 var whitelist = document.getElementById('whiteList');
   whitelist.addEventListener('click', function() {
       var text = "";
+      var url = "";
+      var title = "";
       getText();
     });
 });
@@ -184,8 +186,13 @@ var whitelist = document.getElementById('whiteList');
 
 function getText(){
           chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
-          var url = tabs[0].url;
-          var title = tabs[0].title;
+          if (tabs[0] != undefined){
+                url = tabs[0].url;
+                title = tabs[0].title;
+                if (url.endsWith("/")){
+                  url = url.substring(0,url.length-1);
+          }
+          console.log(url);
           var key = "26cdf4cddb999055b70feb1562fcda9b";
           var api_url = "https://document-parser-api.lateral.io/?url=" + url.toString();
           var request = new XMLHttpRequest();
@@ -194,12 +201,42 @@ function getText(){
           request.setRequestHeader("subscription-key", "26cdf4cddb999055b70feb1562fcda9b");
           request.onreadystatechange = function() {
           var response = JSON.parse(request.responseText);
-          text = response.body;
-          alert(text);
+          text = response.body.toString();
+          console.log(text)
+          //alert(text);
           }
           request.send();
-          });
-}
+          }
+
+          var req = new XMLHttpRequest();
+                req.overrideMimeType(url);
+                req.open('GET', "http://34.89.30.97/phpFakeOutServer/add_whitelist.php" +"?url=" + url + "&text=" + text + "&title=" + title, true);
+                alert(text);
+                req.onload  = function() {
+                var jsonResponse = JSON.parse(req.responseText);
+                number = jsonResponse.success;
+                if(number){
+                var whiteListBtn = document.getElementById("whiteList");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " added to whitelist.";
+                para.style.fontWeight = "bold";
+                whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
+                }
+                else{
+                var blacklistBtn = document.getElementById("whiteList");
+                var para = document.createElement("p");
+                para.style.color = "green";
+                para.textContent = url + " not added to whitelist (already there).";
+                para.style.fontWeight = "bold";
+                whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
+                }
+
+                };
+                req.send(null);
+                //alert(url +  " added to blacklist.");
+                });
+            }
 
             /*textToSearch = JSON.stringify({ texts: [text] });
             var api_url = "https://api.uclassify.com/v1/uClassify/Sentiment/classify";
