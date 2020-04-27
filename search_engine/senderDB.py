@@ -145,15 +145,16 @@ def insertWHOInformation():
     print("Information collected... Please Wait...")
     val = []
     web = 'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen'
-    for i in information:
-        index = information.index(i)
-        val.append((web, None, information[index]))
 
-    print(val)
+    inf = ''
+    for i in information:
+        inf = inf + i
+
+    val = [web, None, inf]
 
     add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s);"
 
-    cursor.executemany(add_order, val)
+    cursor.execute(add_order, val)
     mydb.commit()
     print(cursor.rowcount, "was inserted.")
 
