@@ -196,12 +196,13 @@ function getText(){
           var key = "26cdf4cddb999055b70feb1562fcda9b";
           var api_url = "https://document-parser-api.lateral.io/?url=" + url.toString();
           var request = new XMLHttpRequest();
-          request.open('GET', api_url, true);
+          request.open('GET', api_url, false);
           request.setRequestHeader("content-Type", "application/json");
           request.setRequestHeader("subscription-key", "26cdf4cddb999055b70feb1562fcda9b");
           request.onreadystatechange = function() {
           var response = JSON.parse(request.responseText);
           text = response.body.toString();
+          text = text.replace(/'/g,"");
           console.log(text)
           //alert(text);
           }
@@ -210,10 +211,12 @@ function getText(){
 
           var req = new XMLHttpRequest();
                 req.overrideMimeType(url);
-                req.open('GET', "http://34.89.30.97/phpFakeOutServer/add_whitelist.php" +"?url=" + url + "&text=" + text + "&title=" + title, true);
+                req.open('GET', "http://34.89.30.97/phpFakeOutServer/add_whitelist.php" +"?url=" + url + "&text=" + text + "&title=" + title, false);
                 alert(text);
                 req.onload  = function() {
+
                 var jsonResponse = JSON.parse(req.responseText);
+                console.log(jsonResponse);
                 number = jsonResponse.success;
                 if(number){
                 var whiteListBtn = document.getElementById("whiteList");
@@ -224,7 +227,7 @@ function getText(){
                 whiteListBtn.parentNode.replaceChild(para, whiteListBtn);
                 }
                 else{
-                var blacklistBtn = document.getElementById("whiteList");
+                var whiteListBtn = document.getElementById("whiteList");
                 var para = document.createElement("p");
                 para.style.color = "green";
                 para.textContent = url + " not added to whitelist (already there).";
