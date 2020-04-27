@@ -1,0 +1,39 @@
+{
+  "name": "FakeOff",
+  "version": "1.0",
+  "manifest_version": 2,
+  /*"page_action": {
+  	"default_popup": "popup.js",
+  	"default_icon": "images/get_started16.png"
+  },*/
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery.js", "contentHighlight.js"]
+    },
+    {
+      "matches": ["http://www.google.com/*", "https://www.google.com/*"],
+      "js": ["contentPercentage.js"]
+    }
+  ],
+  "icons": {
+       "16": "iconfake.png",
+       "48": "iconfake.png",
+       "128": "iconfake.png" 
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "https://api.uclassify.com/v1/",
+    "https://document-parser-api.lateral.io/"
+  ],
+  "browser_action": {
+   "default_popup": "popup.html",
+   "default_icon": "iconfake.png"
+  },
+  "background": {
+    "scripts": ["jquery.js", "eventPage.js"],
+    "persistent": false
+  }
+}

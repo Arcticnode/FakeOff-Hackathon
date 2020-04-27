@@ -1,0 +1,30 @@
+body{
+  background: 	#696969;
+}
+
+.buttons {
+  transition-duration: 0.4s;
+}
+
+.buttons:hover {
+  background-color: #ADD8E6;
+  color: #0d2561;
+}
+
+.domain{
+  margin-left: 8px;
+}
+
+hr.solid {
+  border-top: 2px solid #bbb;
+}
+
+#blacklist , #headline, #blockArticle, #whiteList  {
+  display: inline;
+  margin-right: auto;
+  margin-top: auto;
+  width: 23%;
+  height: 40px;
+  text-align:center;
+  line-height:17px;
+}
