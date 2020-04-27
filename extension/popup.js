@@ -208,6 +208,10 @@ function getText(){
           text = text.replace(/^a-zA-Z0-9]/g, "");
           text = text.replace(/@/g, "");
           title = title.replace(/'/g,"");
+          text = text.replace(/’/g,"");
+          text = text.replace(/#/g,"");
+          title = title.replace(/#/g,"");
+
           console.log(url);
           console.log(title);
 
@@ -221,6 +225,8 @@ function getText(){
                 req.overrideMimeType(url);
                 req.open('GET', "http://34.89.30.97/phpFakeOutServer/add_whitelist.php" +"?url=" + url + "&text=" + text + "&title=" + title, false);
                 req.onload  = function() {
+                  var resp = req.responseText;
+                  console.log(resp);
 
                 var jsonResponse = JSON.parse(req.responseText);
                 console.log(jsonResponse);
