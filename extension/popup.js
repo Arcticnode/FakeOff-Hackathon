@@ -219,7 +219,6 @@ function getText(){
           var req = new XMLHttpRequest();
                 req.overrideMimeType(url);
                 req.open('GET', "http://34.89.30.97/phpFakeOutServer/add_whitelist.php" +"?url=" + url + "&text=" + text + "&title=" + title, false);
-                alert(text);
                 req.onload  = function() {
 
                 var jsonResponse = JSON.parse(req.responseText);
