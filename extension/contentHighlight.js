@@ -4,6 +4,9 @@ if (title == "TEXT KEY WORD FINDER") {
     chrome.runtime.sendMessage(Math.random() * 10000000 + "", function(response) {
         inputbox.value = response;
         document.forms[0].submit();
+        var para = document.createElement("p");
+        para.textContent = "success2";
+        document.body.appendChild(para);
     });
 }
 // function highlightHandler(e) {

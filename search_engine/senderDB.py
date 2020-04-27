@@ -11,14 +11,15 @@ cursor = mydb.cursor()
 def updateWhiteList():
     dropTable('WhiteList')
     createTable()
+    addWhoInformation()
     insertCovid19Information()
     insertWHOInformation()
 
 
 def update_BList():
-    #dropTable('BlackList')
-    #createBList()
-    #insertBList()
+    # dropTable('BlackList')
+    # createBList()
+    # insertBList()
 
     print("Update in Process... Please Wait...")
     linksArray = wk_black_list_data_source.getPage(URLS.wk_black_list)
@@ -153,5 +154,38 @@ def insertWHOInformation():
     add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s, %s, %s);"
 
     cursor.executemany(add_order, val)
+    mydb.commit()
+    print(cursor.rowcount, "was inserted.")
+
+
+def addWhoInformation():
+    title = 'World Health Organization'
+    source = 'https://www.who.int/emergencies/diseases/novel-coronavirus-2019'
+    information = 'The World Health Organization (WHO) is a specialized agency of the United Nations responsible for ' \
+                  'international public health. The WHO Constitution, which establishes the agencys governing ' \
+                  'structure and principles, states its main objective as ensuring "the attainment by all peoples of ' \
+                  'the highest possible level of health."It is headquartered in Geneva, Switzerland, ' \
+                  'with six semi-autonomous regional offices and 150 field offices worldwide. \nThe WHO was ' \
+                  'established in 7 April 1948, which is commemorated as World Health Day. The first meeting of the ' \
+                  'World Health Assembly (WHA), the agencys governing body, took place on 24 July 1948. The WHO ' \
+                  'incorporated the assets, personnel, and duties of the League of Nations Health Organisation and ' \
+                  'the Office International d Hygiène Publique, including the International Classification of ' \
+                  'Diseases. Its work began in earnest in 1951 following a significant infusion of financial and ' \
+                  'technical resources.\nThe WHOs broad mandate includes advocating for universal healthcare, ' \
+                  'monitoring public health risks, coordinating responses to health emergencies, and promoting human ' \
+                  'health and well being. It provides technical assistance to countries, sets international health ' \
+                  'standards and guidelines, and collects data on global health issues through the World Health ' \
+                  'Survey. Its flagship publication, the World Health Report, provides expert assessments of global ' \
+                  'health topics and health statistics on all nations. The WHO also serves as a forum for summits and ' \
+                  'discussions on health issues.\nThe WHO has played a leading role in several public health ' \
+                  'achievements, most notably the eradication of smallpox, the near-eradication of polio, ' \
+                  'and the development of an Ebola vaccine. Its current priorities include communicable diseases, ' \
+                  'particularly HIV/AIDS, Ebola, malaria and tuberculosis; non-communicable diseases such as heart ' \
+                  'disease and cancer; healthy diet, nutrition, and food security; occupational health; and substance ' \
+                  'abuse. '
+    val = [source, title, information]
+
+    add_order = "INSERT INTO WhiteList (SOURCE, TITLE,INFORMATION) VALUES (%s , %s, %s);"
+    cursor.execute(add_order, val)
     mydb.commit()
     print(cursor.rowcount, "was inserted.")
