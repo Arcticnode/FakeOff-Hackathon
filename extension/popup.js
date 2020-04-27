@@ -203,6 +203,13 @@ function getText(){
           var response = JSON.parse(request.responseText);
           text = response.body.toString();
           text = text.replace(/'/g,"");
+          text = text.replace(/"/g,"");
+          text = text.replace(/^a-zA-Z0-9]/g, "");
+          text = text.replace(/@/g, "");
+          title = title.replace(/'/g,"");
+          console.log(url);
+          console.log(title);
+
           console.log(text)
           //alert(text);
           }
