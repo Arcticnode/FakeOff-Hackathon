@@ -24,4 +24,8 @@ MENU
 BACKGROUND
 
 highlighting text in the article and searching for related articles: 
-If you select text and right click, you will be given the option to look for related articles contained in our trustworthy database. 
+If you select text and right click, you will be given the option to look for related articles contained in our trustworthy database. The content is displayed in a new tab so you have to give permission.
+
+POTENTIAL ERROR:
+
+if the trustworthy/untrustworthy labels are not displaying, it might be that you don't trust the IP address. This can be fixed by manually pasting the IP address into the browser and allowing permissions. 
