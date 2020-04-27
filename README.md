@@ -8,6 +8,7 @@ The second server extracts keywords using text analysis.
 
 Functionality:
 MENU
+
 - Block Domain :
   allows users to flag the entire website as untrustworthy
   
@@ -21,5 +22,6 @@ MENU
   performs sentiment analysis on the headline to check for clickbait
 
 BACKGROUND
+
 highlighting text in the article and searching for related articles: 
 If you select text and right click, you will be given the option to look for related articles contained in our trustworthy database. 
