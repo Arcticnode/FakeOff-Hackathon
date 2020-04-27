@@ -177,13 +177,31 @@ document.addEventListener('DOMContentLoaded', function() {
 var bodyText = document.getElementById('text');
   bodyText.addEventListener('click', function() {
       var text = "";
-      //getText();
+      getText();
     });
 });
 
-        /*function getText(){
-            text = document.getElementsByTagName('body')[0].innerText || document.body.textContent;
-            alert(text);
+
+function getText(){
+          chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
+          var url = tabs[0].url;
+          var title = tabs[0].title;
+          var key = "26cdf4cddb999055b70feb1562fcda9b";
+          var api_url = "https://document-parser-api.lateral.io/?url=" + url.toString();
+          var request = new XMLHttpRequest();
+          request.open('GET', api_url, true);
+          request.setRequestHeader("content-Type", "application/json");
+          request.setRequestHeader("subscription-key", "26cdf4cddb999055b70feb1562fcda9b");
+          request.onreadystatechange = function() {
+          var response = JSON.parse(request.responseText);
+          text = response.body;
+          alert(text);
+          }
+          request.send();
+          });
+}
+
+            /*textToSearch = JSON.stringify({ texts: [text] });
             var api_url = "https://api.uclassify.com/v1/uClassify/Sentiment/classify";
             var request = new XMLHttpRequest();
             request.open('POST', api_url, true);
@@ -193,5 +211,7 @@ var bodyText = document.getElementById('text');
             var response = request.responseText;
             alert(response);
             }
-            request.send(JSON.stringify({ texts: ["the movie is really good"] }));
+            request.send(text);
           }*/
+
+
